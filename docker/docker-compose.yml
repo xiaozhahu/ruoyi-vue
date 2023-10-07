@@ -22,7 +22,7 @@ services:
         ]
     environment:
       MYSQL_DATABASE: 'ry-vue'
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: 521FORever
   ruoyi-redis:
     container_name: ruoyi-redis
     image: redis
