@@ -180,7 +180,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
-        <module>rouyi-netmanager</module>
+        <module>rouyi-netmspec</module>
     </modules>
     <packaging>pom</packaging>
 
