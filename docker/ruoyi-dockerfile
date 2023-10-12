@@ -1,8 +1,8 @@
 # 基础镜像
-FROM java:8
+FROM openjdk:8
 # author
 MAINTAINER ruoyi
-
+ENV TZ=Asia/Shanghai
 # 挂载目录
 VOLUME /home/ruoyi
 # 创建目录
