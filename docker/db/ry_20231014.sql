@@ -471,6 +471,9 @@ insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0',
 insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
+insert into sys_dict_type values (11, '设备类目', 'netm_device_category', '0', 'admin', sysdate(), '', null, '网络管理-设备类目列表');
+insert into sys_dict_type values (12, '资源类目', 'netm_resource_category', '0', 'admin', sysdate(), '', null, '网络管理-资源类目列表');
+insert into sys_dict_type values (13, '指标类目', 'netm_index_category', '0', 'admin', sysdate(), '', null, '网络管理-指标类目列表');
 
 
 -- ----------------------------
@@ -525,7 +528,40 @@ insert into sys_dict_data values(26, 8,  '生成代码', '8',       'sys_oper_ty
 insert into sys_dict_data values(27, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '清空操作');
 insert into sys_dict_data values(28, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'admin', sysdate(), '', null, '正常状态');
 insert into sys_dict_data values(29, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '停用状态');
-
+insert into sys_dict_data values (30, 1, '服务器', '0', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (31, 2, '交换机', '1', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (32, 3, '路由器', '2', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (33, 6, 'PC', '5', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (34, 5, '防火墙', '4', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (35, 7, '虚拟机', '6', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (36, 8, '数据库', '7', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (37, 9, '中间件', '8', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (38, 4, '网络设备', '3', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (39, 10, '流量设备', '9', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (40, 11, '负载均衡', '10', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (41, 12, '途径设备', '11', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (42, 13, '其他', '12', 'netm_device_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (43, 1, '处理器', '0', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (44, 2, '内存', '1', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (45, 3, '网络接口', '2', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (46, 4, '磁盘', '3', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (47, 5, '服务', '4', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (48, 6, '进程', '5', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (49, 7, '数据库', '6', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (50, 8, '中间件', '7', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (51, 9, 'JVM', '8', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (52, 10, '板槽', '9', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (53, 11, '其他', '10', 'netm_resource_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (54, 1, '运行状态', '0', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (55, 2, 'CPU使用率', '1', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (56, 3, '内存使用率', '2', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (57, 4, '输入流量', '3', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (58, 5, '输出流量', '4', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (59, 6, '上行带宽', '5', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (60, 7, '下行带宽', '6', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (61, 8, '磁盘使用率', '7', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (62, 9, '数据库连接数', '8', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (63, 10, 'JVM内存利用率', '9', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
 
 -- ----------------------------
 -- 13、参数配置表
