@@ -1,4 +1,4 @@
-package com.ruoyi.netmanager.domain;
+package com.ruoyi.netmanager.domain.topo;
 
 
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -13,7 +13,4 @@ public class Network extends BaseEntity {
     @NotBlank(message = "网络名称不能为空")
     private String name;
 
-    private Long[] nodes;
-
-    private Long[] links;
 }
