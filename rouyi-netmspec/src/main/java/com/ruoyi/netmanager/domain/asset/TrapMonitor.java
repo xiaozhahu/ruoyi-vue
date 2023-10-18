@@ -4,6 +4,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author old.lazy.sexy
  * @description 指标: cup使用率|内存使用率 等
@@ -13,8 +16,12 @@ import lombok.Setter;
 @Setter
 public class TrapMonitor extends BaseEntity {
 
+    @NotNull
+    @NotBlank
     private String name;
 
+    @NotNull
+    @NotBlank
     private String trapOid;
 
     private String formatter;
@@ -28,6 +35,22 @@ public class TrapMonitor extends BaseEntity {
     /**  时间优先级: 低级|中级|高级|紧急 */
     private String eventPriority;
 
+    private String version;
+
+    private String v1StandardType;
+
+    private String v1PrivateType;
+
+    @NotNull
+    @NotBlank
+    private String resource;
+
+    private String resourceOid;
+
+    private String valueOid;
+
+    @NotNull
+    @NotBlank
     private String index;
 
     /**  运算式 */
