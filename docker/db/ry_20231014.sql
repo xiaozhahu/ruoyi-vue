@@ -474,6 +474,22 @@ insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0',
 insert into sys_dict_type values (11, '设备类目', 'netm_device_category', '0', 'admin', sysdate(), '', null, '网络管理-设备类目列表');
 insert into sys_dict_type values (12, '资源类目', 'netm_resource_category', '0', 'admin', sysdate(), '', null, '网络管理-资源类目列表');
 insert into sys_dict_type values (13, '指标类目', 'netm_index_category', '0', 'admin', sysdate(), '', null, '网络管理-指标类目列表');
+insert into sys_dict_type values (14, '设备模型', 'netm_device_model', '0', 'admin', sysdate(), '', null, '设备类型下资源、链路的固定识别和显示方式，下挂的发现和连通性监控方式，以及针对该型号进行在线升级等针对该型号的特殊处理方式。该参数是可自定义插件扩展接口，可通过编写插件并注入平台实现设备型号定制化处理，通常情况下选择：通用模型或不填写。');
+insert into sys_dict_type values (15, '资源发现方法', 'netm_device_resource_search_way', '0', 'admin', sysdate(), '', null, '设备资源发现、匹配以及回显方式');
+insert into sys_dict_type values (16, '监控协议', 'netm_protocol', '0', 'admin', sysdate(), '', null, '网络管理-监控协议');
+insert into sys_dict_type values (17, '技术类型', 'netm_search_tool', '0', 'admin', sysdate(), '', null, '该资源类型的发现和监控所需要的技术。若该资源是通过SNMP协议的OID关联匹配的，且监控也基于SNMP协议OID的轮询进行，则配置SNMP即可');
+insert into sys_dict_type values (18, '发现方法', 'netm_search_method', '0', 'admin', sysdate(), '', null, '资源发现的算法程序，通过该算法实现将设备所上支持的某种协议根据资源识别码所获取到的某个值或某些内容，并将其解析转换为软件设备上对应的资源对象。若获取到的结果为多个资源，需要将其对应的资源索引或对应的编号填充到资源编号属性作为该资源的唯一标识。该参数为插件扩展接口，可通过编写插件实现自定义资源解析');
+insert into sys_dict_type values (19, '指标告警过滤规则', 'netm_index_alarm_filter', '0', 'admin', sysdate(), 'admin', null, '当前指标的告警、trap等故障监控的过滤方式选择，默认无需过滤可不填写该内容');
+insert into sys_dict_type values (20, '指标数值类型', 'netm_index_value_type', '0', 'admin', sysdate(), '', null, '数值类 如 温度、丢包数;2,文本类 如：固件版本号、序列号;3,占比类 如：CPU、内存;4,时间类 如：最近访问时间;5,状态类 如：接口UP、接口Down');
+insert into sys_dict_type values (21, '监视器类型', 'netm_monitor_type', '0', 'admin', sysdate(), '', null, '指标监视器。可选故障监视器、状态监视器、性能监视器。故障监视器用于判断值的大小超过预设值产生故障，状态监视器用于监控值的变化情况值状态值发生变化就会产生故障，性能监视器用于监视设备资源性能');
+insert into sys_dict_type values (22, '指标监视器监视算法', 'netm_monitor_method', '0', 'admin', sysdate(), '', null, '监视器根据配置的监视目标，与设备交互获取到设备对应的结果值，并将获取的结果按照配置的顺序返回，系统自动根据运算式的运算表达式依次带入值进行运算。该参数为插件扩展接口，可通过编写插件实现自定义资源解析，另外系统默认提供了大部分设备通用或占用的监视算法');
+insert into sys_dict_type values (23, '故障触发操作符', 'netm_monitor_condition_operator', '0', 'admin', sysdate(), '', null, '最后计算结果的故障触发条件设置');
+insert into sys_dict_type values (24, 'Trap消息展现方式', 'netm_trap_display_mode', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_type values (25, 'Trap事件类型', 'netm_trap_event_type', '0', 'admin', sysdate(), '', null, '该Trap解析事件类型');
+insert into sys_dict_type values (26, 'Trap版本', 'netm_trap_version', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_type values (27, '事件优先级', 'netm_trap_event_priority', '0', 'admin', sysdate(), '', null, 'Trap解析事件优先级');
+insert into sys_dict_type values (28, 'Trap特殊解析器', 'netm_trap_special_parser', '0', 'admin', sysdate(), '', null, '特殊解析规则，针对不同设备、不同Trap消息需要做定制化开发');
+
 
 
 -- ----------------------------
@@ -562,6 +578,60 @@ insert into sys_dict_data values (60, 7, '下行带宽', '6', 'netm_index_catego
 insert into sys_dict_data values (61, 8, '磁盘使用率', '7', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
 insert into sys_dict_data values (62, 9, '数据库连接数', '8', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
 insert into sys_dict_data values (63, 10, 'JVM内存利用率', '9', 'netm_index_category', '', 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (64, 1, '通用模型', '0', 'netm_device_model', null, 'default', 'N', '0', 'admin', sysdate(), 'admin', null, null);
+insert into sys_dict_data values (65, 1, '搜索方法', '0', 'netm_device_resource_search_way', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '根据设备类型所配置的设备模板进行完全拷贝资源到当作当前设备的资源，不会到设备中去发现。通常用于配置设备面板图且资源类型、资源属性、资源数量和编号固定的设备型号。');
+insert into sys_dict_data values (66, 2, '静态模板', '1', 'netm_device_resource_search_way', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '根据设备类型所绑定的资源类型去设备进行发现。并将发现的结果以列表的方式展示。通常用于无需面板图且资源类型、资源属性、资源数量和编号都不固定的设备型号，系统默认选择该策略');
+insert into sys_dict_data values (67, 1, 'SNMP', '0', 'netm_protocol', null, 'default', 'N', '0', 'admin', sysdate(), '', null, 'SNMP协议');
+insert into sys_dict_data values (68, 1, 'SNMP表', '0', 'netm_search_tool', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '若该资源是通过SNMP协议的OID关联匹配的，且监控也基于SNMP协议OID的轮询进行，则配置SNMP表即可');
+insert into sys_dict_data values (69, 1, '通用SNMP表发现方法', '0', 'netm_search_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '通用表发现方法，设备名称和设备参数必须填写，监视目标填写表OID，无需填写括号');
+insert into sys_dict_data values (70, 1, '告警白名单过滤', '0', 'netm_index_alarm_filter', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (71, 2, '告警次数过滤', '1', 'netm_index_alarm_filter', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (72, 3, '告警时长过滤', '2', 'netm_index_alarm_filter', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (73, 1, '数值类', '0', 'netm_index_value_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (74, 2, '文本类', '1', 'netm_index_value_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (75, 3, '占比类', '2', 'netm_index_value_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (76, 4, '时间类', '3', 'netm_index_value_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (77, 5, '状态类', '4', 'netm_index_value_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (78, 1, '故障监视器', '0', 'netm_monitor_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (79, 2, '状态监视器', '1', 'netm_monitor_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (80, 3, '性能监视器', '2', 'netm_monitor_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (81, 1, 'CPU 使用率监视器', '0', 'netm_monitor_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, 'cpu使用率监视，只支持通用HOST-RESOURCES-MIB，多核cpu取平均值(hrProcessorLoad1.3.6.1.2.1.25.3.3.1.2)');
+insert into sys_dict_data values (82, 2, '连通性监视器', '1', 'netm_monitor_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '默认所有设备的系统连通性监视器算法，该连通性任务的执行通过获取设备类型所绑定的设备模型进行连通性判断');
+insert into sys_dict_data values (83, 3, 'SNMP代理活动监视器', '2', 'netm_monitor_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, 'SNMP Ageng活动状态监视,监视目标较容易获取的叶子OID');
+insert into sys_dict_data values (84, 4, 'SNMP响应时间监视器', '3', 'netm_monitor_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, 'TCP服务端口监视,SNMP延迟时间，监视参数，较容易获得的叶子节点OID');
+insert into sys_dict_data values (85, 5, 'SNMP简单数据监视器', '4', 'netm_monitor_method', null, 'default', 'N', '0', 'admin', sysdate(), '', null, '简单数据监视 获取指定OID数据 不支持运算 &lt;1.3.6.1.2.1.25.3.3.1.2.&gt; 代替索引，如果监视参数不为空，则去除采集数据中的单位，比如 ，监视参数为 % 去除值为 10% 采集结果就为10');
+insert into sys_dict_data values (86, 1, '=', '0', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (87, 2, '>=', '1', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (88, 3, '<=', '2', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (89, 4, '!=', '3', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (90, 5, '<>', '4', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (91, 6, '!<>', '5', 'netm_monitor_condition_operator', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (93, 1, '告警', '0', 'netm_trap_display_mode', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (94, 2, '事件', '1', 'netm_trap_display_mode', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (95, 1, '认证相关', '0', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (96, 2, '授权相关', '1', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (97, 3, '任务计划相关', '2', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (98, 4, '守护进程相关', '3', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (99, 5, '内核相关', '4', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (100, 6, '安全相关', '5', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (101, 7, '打印相关', '6', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (102, 8, '用户相关', '7', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (103, 9, 'IP-MAC绑定', '8', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (104, 10, 'IP使用', '9', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (105, 16, '其他', '15', 'netm_trap_event_type', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (106, 1, 'V1', '0', 'netm_trap_version', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (107, 2, 'V2', '1', 'netm_trap_version', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (108, 1, '低级', '0', 'netm_trap_event_priority', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (109, 2, '中级', '1', 'netm_trap_event_priority', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (110, 3, '高级', '2', 'netm_trap_event_priority', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (111, 4, '紧急', '3', 'netm_trap_event_priority', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (112, 1, 'Common trap proccessor', '0', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (113, 2, 'one-to-more trap proccessor', '1', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (114, 3, 'HM IP Conflict Trap Proccessor', '2', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (115, 4, 'MOXA MACIP Conflict Proccessor', '3', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (116, 5, 'HM Ring Red Proccessor', '4', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (117, 6, 'MOXA Ring Red Proccessor', '5', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
+insert into sys_dict_data values (118, 7, ' Westermo Ring Red Proccessor', '6', 'netm_trap_special_parser', null, 'default', 'N', '0', 'admin', sysdate(), '', null, null);
 
 -- ----------------------------
 -- 13、参数配置表
@@ -735,3 +805,142 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+drop table if exists netm_device;
+create table netm_device
+(
+    device_id            bigint auto_increment primary key,
+    name                 varchar(256)                not null comment '设备名称',
+    `desc`               varchar(640)                null comment '描述信息',
+    model                varchar(384)                null,
+    category             varchar(256) default '其他'   not null comment '设备类别',
+    firmware_suffix      varchar(64)  default '.bin' null,
+    icon                 varchar(256)                null,
+    discovery_way        varchar(128) default '搜索方法' null comment '资源发现方法',
+    background_image     varchar(256)                null,
+    protocol             varchar(128) default 'SNMP' not null comment '监控协议',
+    web_url              varchar(256)                null comment 'web访问地址',
+    sys_oid              varchar(1024)               null,
+    enabled              tinyint(1)   default 1      null,
+    topo_locked          tinyint(1)   default 0      null comment '是否锁定在拓扑图中的位置',
+    topo_show_name       tinyint(1)   default 1      null comment '是否在拓扑图中显示资源名称',
+    topo_full_screen     tinyint(1)   default 0      null comment '是否在全屏模式下显示该设备类型',
+    desc_contain_matcher varchar(1024)               null comment '系统描述包含匹配',
+    create_time          datetime                    null,
+    create_by            varchar(64)  default ''     null,
+    update_by            varchar(64)  default ''     null,
+    update_time          datetime                    null,
+    remark               varchar(500) default ''     null
+) comment '设备';
+
+drop table if exists netm_resource;
+create table netm_resource
+(
+    resource_id      bigint auto_increment primary key,
+    name             varchar(256)                not null,
+    icon             varchar(256)                not null,
+    category         varchar(256)                null,
+    code             varchar(128)                null comment '资源识别码,暂时仅支持oid',
+    protocol         varchar(128) default 'SNMP' null,
+    discovery_way    varchar(256)                null,
+    param_name       varchar(128)                null comment '资源名称',
+    param_value      varchar(64)                 null,
+    param_desc       varchar(512)                null,
+    parent           varchar(128)                null comment '父资源',
+    un_managed_style tinyint(1)   default 0      null comment '不可管理资源是否需要特殊显示',
+    linkable         tinyint(1)   default 0      null comment '是否支持连接',
+    device_improved  tinyint(1)   default 0      null comment '是否提升为设备',
+    enabled          tinyint(1)   default 1      null,
+    upper_layer      tinyint(1)   default 0      null comment '是否显示图层靠前',
+    create_time      datetime                    null,
+    create_by        varchar(64)  default ''     null,
+    update_time      datetime                    null,
+    update_by        varchar(64)  default ''     null,
+    remark           varchar(500)                null,
+    constraint netm_resource_name_uindex unique (name)
+) comment '资源';
+
+drop table if exists netm_index;
+create table netm_index
+(
+    index_id     bigint auto_increment primary key,
+    category     varchar(256)           not null,
+    unit         varchar(64)            not null comment '指标单位',
+    alarm_filter varchar(128)           null comment '过滤规则',
+    param        varchar(64)            null,
+    name         varchar(256)           not null,
+    priority     int                    null comment '指标关键程度',
+    value_type   varchar(64)            null comment '指标数值类型',
+    create_time  datetime               null,
+    create_by    varchar(64) default '' null,
+    update_by    varchar(64) default '' null,
+    update_time  datetime               null,
+    `desc`       varchar(500)           null comment '指标描述',
+    remark       varchar(500)           null,
+    constraint netm_index_name_uindex unique (name)
+) comment '指标';
+
+drop table if exists netm_index_monitor;
+create table netm_index_monitor
+(
+    monitor_id          bigint auto_increment primary key,
+    name                varchar(256)           not null,
+    `desc`              varchar(500)           null comment '监视器描述',
+    resource            varchar(256)           not null comment '资源类型',
+    `index`             varchar(256)           not null comment '监控的指标',
+    monitor_way         varchar(256)           not null comment '监控算法',
+    target_param        varchar(512)           null comment '监控目标',
+    expression          varchar(512)           null comment '运算表达式',
+    `interval`          int         default 30 not null comment '监控周期',
+    operator            varchar(32)            null comment '判断条件操作符',
+    serious_threshold   int                    not null,
+    primary_threshold   int                    not null,
+    secondary_threshold int                    not null,
+    cause               varchar(256)           null comment '故障原因设定',
+    advice              varchar(256)           null comment '处理建议',
+    parser              varchar(256)           null comment '解析表达式',
+    auto_run            tinyint(1)  default 1  null,
+    counter             tinyint(1)  default 0  null comment '是否需要计数',
+    enabled             tinyint(1)  default 1  null,
+    create_time         datetime               null,
+    create_by           varchar(64) default '' null,
+    update_time         datetime               null,
+    update_by           varchar(64) default '' null,
+    remark              varchar(500)           null,
+    constraint netm_index_monitor_name_uindex unique (name)
+) comment '指标监视器';
+
+drop table if exists netm_trap_monitor;
+create table netm_trap_monitor
+(
+    monitor_id          bigint auto_increment primary key,
+    name                varchar(256)              not null,
+    trap_oid            varchar(128)              not null,
+    `desc`              varchar(500)              null comment '监视器描述',
+    formatter           varchar(512)              null comment 'trap消息模板',
+    display_mode        varchar(64)               null comment '展现方式',
+    event_type          varchar(256)              null comment '时间类型',
+    priority            varchar(64)               null comment '事件优先级',
+    trap_version        varchar(64)               null comment 'trap版本',
+    v1_standard_type    varchar(128)              null,
+    v1_private_type     varchar(128) default '-1' null,
+    resource            varchar(256)              not null comment '资源类型',
+    resource_oid        varchar(128)              null comment 'trap消息中对应的资源oid',
+    value_oid           varchar(128)              null comment 'trap消息中监视的值oid',
+    desc_oid            varchar(128)              null comment 'trap消息中对应的描述iod',
+    `index`             varchar(256)              not null comment '监控的指标',
+    operator            varchar(32)               null comment '判断条件操作符',
+    serious_threshold   int                       not null,
+    primary_threshold   int                       not null,
+    secondary_threshold int                       not null,
+    cause               varchar(256)              null comment '故障原因设定',
+    special_parser      tinyint(1)                null comment '是否需要特殊解析器',
+    parser_processor    varchar(256)              null comment '特殊解析器算法',
+    enabled             tinyint(1)   default 1    null,
+    create_time         datetime                  null,
+    create_by           varchar(64)  default ''   null,
+    update_by           varchar(64)  default ''   null,
+    update_time         datetime                  null,
+    remark              varchar(500)              null,
+    constraint netm_index_monitor_name_uindex unique (name)
+) comment 'Trap监视器';

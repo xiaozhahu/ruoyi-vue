@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.netmanager.domain.asset.mapper.TrapMonitorMapper">
+    
+    <resultMap type="TrapMonitor" id="TrapMonitorResult">
+        <result property="monitorId"    column="monitor_id"    />
+        <result property="name"    column="name"    />
+        <result property="trapOid"    column="trap_oid"    />
+        <result property="desc"    column="desc"    />
+        <result property="formatter"    column="formatter"    />
+        <result property="displayMode"    column="display_mode"    />
+        <result property="eventType"    column="event_type"    />
+        <result property="priority"    column="priority"    />
+        <result property="trapVersion"    column="trap_version"    />
+        <result property="v1StandardType"    column="v1_standard_type"    />
+        <result property="v1PrivateType"    column="v1_private_type"    />
+        <result property="resource"    column="resource"    />
+        <result property="resourceOid"    column="resource_oid"    />
+        <result property="valueOid"    column="value_oid"    />
+        <result property="descOid"    column="desc_oid"    />
+        <result property="index"    column="index"    />
+        <result property="operator"    column="operator"    />
+        <result property="seriousThreshold"    column="serious_threshold"    />
+        <result property="primaryThreshold"    column="primary_threshold"    />
+        <result property="secondaryThreshold"    column="secondary_threshold"    />
+        <result property="cause"    column="cause"    />
+        <result property="specialParser"    column="special_parser"    />
+        <result property="parserProcessor"    column="parser_processor"    />
+        <result property="enabled"    column="enabled"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTrapMonitorVo">
+        select monitor_id, name, trap_oid, desc, formatter, display_mode, event_type, priority, trap_version, v1_standard_type, v1_private_type, resource, resource_oid, value_oid, desc_oid, index, operator, serious_threshold, primary_threshold, secondary_threshold, cause, special_parser, parser_processor, enabled, create_time, create_by, update_by, update_time, remark from netm_trap_monitor
+    </sql>
+
+    <select id="selectTrapMonitorList" parameterType="TrapMonitor" resultMap="TrapMonitorResult">
+        <include refid="selectTrapMonitorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="trapOid != null  and trapOid != ''"> and trap_oid = #{trapOid}</if>
+            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
+            <if test="formatter != null  and formatter != ''"> and formatter = #{formatter}</if>
+            <if test="displayMode != null  and displayMode != ''"> and display_mode = #{displayMode}</if>
+            <if test="eventType != null  and eventType != ''"> and event_type = #{eventType}</if>
+            <if test="priority != null  and priority != ''"> and priority = #{priority}</if>
+            <if test="trapVersion != null  and trapVersion != ''"> and trap_version = #{trapVersion}</if>
+            <if test="v1StandardType != null  and v1StandardType != ''"> and v1_standard_type = #{v1StandardType}</if>
+            <if test="v1PrivateType != null  and v1PrivateType != ''"> and v1_private_type = #{v1PrivateType}</if>
+            <if test="resource != null  and resource != ''"> and resource = #{resource}</if>
+            <if test="resourceOid != null  and resourceOid != ''"> and resource_oid = #{resourceOid}</if>
+            <if test="valueOid != null  and valueOid != ''"> and value_oid = #{valueOid}</if>
+            <if test="descOid != null  and descOid != ''"> and desc_oid = #{descOid}</if>
+            <if test="index != null  and index != ''"> and index = #{index}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="seriousThreshold != null "> and serious_threshold = #{seriousThreshold}</if>
+            <if test="primaryThreshold != null "> and primary_threshold = #{primaryThreshold}</if>
+            <if test="secondaryThreshold != null "> and secondary_threshold = #{secondaryThreshold}</if>
+            <if test="cause != null  and cause != ''"> and cause = #{cause}</if>
+            <if test="specialParser != null "> and special_parser = #{specialParser}</if>
+            <if test="parserProcessor != null  and parserProcessor != ''"> and parser_processor = #{parserProcessor}</if>
+            <if test="enabled != null "> and enabled = #{enabled}</if>
+        </where>
+    </select>
+    
+    <select id="selectTrapMonitorByMonitorId" parameterType="Long" resultMap="TrapMonitorResult">
+        <include refid="selectTrapMonitorVo"/>
+        where monitor_id = #{monitorId}
+    </select>
+        
+    <insert id="insertTrapMonitor" parameterType="TrapMonitor" useGeneratedKeys="true" keyProperty="monitorId">
+        insert into netm_trap_monitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="trapOid != null and trapOid != ''">trap_oid,</if>
+            <if test="desc != null">desc,</if>
+            <if test="formatter != null">formatter,</if>
+            <if test="displayMode != null">display_mode,</if>
+            <if test="eventType != null">event_type,</if>
+            <if test="priority != null">priority,</if>
+            <if test="trapVersion != null">trap_version,</if>
+            <if test="v1StandardType != null">v1_standard_type,</if>
+            <if test="v1PrivateType != null">v1_private_type,</if>
+            <if test="resource != null and resource != ''">resource,</if>
+            <if test="resourceOid != null">resource_oid,</if>
+            <if test="valueOid != null">value_oid,</if>
+            <if test="descOid != null">desc_oid,</if>
+            <if test="index != null and index != ''">index,</if>
+            <if test="operator != null">operator,</if>
+            <if test="seriousThreshold != null">serious_threshold,</if>
+            <if test="primaryThreshold != null">primary_threshold,</if>
+            <if test="secondaryThreshold != null">secondary_threshold,</if>
+            <if test="cause != null">cause,</if>
+            <if test="specialParser != null">special_parser,</if>
+            <if test="parserProcessor != null">parser_processor,</if>
+            <if test="enabled != null">enabled,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="trapOid != null and trapOid != ''">#{trapOid},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="formatter != null">#{formatter},</if>
+            <if test="displayMode != null">#{displayMode},</if>
+            <if test="eventType != null">#{eventType},</if>
+            <if test="priority != null">#{priority},</if>
+            <if test="trapVersion != null">#{trapVersion},</if>
+            <if test="v1StandardType != null">#{v1StandardType},</if>
+            <if test="v1PrivateType != null">#{v1PrivateType},</if>
+            <if test="resource != null and resource != ''">#{resource},</if>
+            <if test="resourceOid != null">#{resourceOid},</if>
+            <if test="valueOid != null">#{valueOid},</if>
+            <if test="descOid != null">#{descOid},</if>
+            <if test="index != null and index != ''">#{index},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="seriousThreshold != null">#{seriousThreshold},</if>
+            <if test="primaryThreshold != null">#{primaryThreshold},</if>
+            <if test="secondaryThreshold != null">#{secondaryThreshold},</if>
+            <if test="cause != null">#{cause},</if>
+            <if test="specialParser != null">#{specialParser},</if>
+            <if test="parserProcessor != null">#{parserProcessor},</if>
+            <if test="enabled != null">#{enabled},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTrapMonitor" parameterType="TrapMonitor">
+        update netm_trap_monitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="trapOid != null and trapOid != ''">trap_oid = #{trapOid},</if>
+            <if test="desc != null">desc = #{desc},</if>
+            <if test="formatter != null">formatter = #{formatter},</if>
+            <if test="displayMode != null">display_mode = #{displayMode},</if>
+            <if test="eventType != null">event_type = #{eventType},</if>
+            <if test="priority != null">priority = #{priority},</if>
+            <if test="trapVersion != null">trap_version = #{trapVersion},</if>
+            <if test="v1StandardType != null">v1_standard_type = #{v1StandardType},</if>
+            <if test="v1PrivateType != null">v1_private_type = #{v1PrivateType},</if>
+            <if test="resource != null and resource != ''">resource = #{resource},</if>
+            <if test="resourceOid != null">resource_oid = #{resourceOid},</if>
+            <if test="valueOid != null">value_oid = #{valueOid},</if>
+            <if test="descOid != null">desc_oid = #{descOid},</if>
+            <if test="index != null and index != ''">index = #{index},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="seriousThreshold != null">serious_threshold = #{seriousThreshold},</if>
+            <if test="primaryThreshold != null">primary_threshold = #{primaryThreshold},</if>
+            <if test="secondaryThreshold != null">secondary_threshold = #{secondaryThreshold},</if>
+            <if test="cause != null">cause = #{cause},</if>
+            <if test="specialParser != null">special_parser = #{specialParser},</if>
+            <if test="parserProcessor != null">parser_processor = #{parserProcessor},</if>
+            <if test="enabled != null">enabled = #{enabled},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where monitor_id = #{monitorId}
+    </update>
+
+    <delete id="deleteTrapMonitorByMonitorId" parameterType="Long">
+        delete from netm_trap_monitor where monitor_id = #{monitorId}
+    </delete>
+
+    <delete id="deleteTrapMonitorByMonitorIds" parameterType="String">
+        delete from netm_trap_monitor where monitor_id in 
+        <foreach item="monitorId" collection="array" open="(" separator="," close=")">
+            #{monitorId}
+        </foreach>
+    </delete>
+</mapper>

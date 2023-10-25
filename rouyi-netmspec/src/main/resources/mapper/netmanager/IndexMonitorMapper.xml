@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.com.ruoyi.netmanager.domain.asset.mapper.IndexMonitorMapper">
+    
+    <resultMap type="IndexMonitor" id="IndexMonitorResult">
+        <result property="monitorId"    column="monitor_id"    />
+        <result property="name"    column="name"    />
+        <result property="desc"    column="desc"    />
+        <result property="resource"    column="resource"    />
+        <result property="index"    column="index"    />
+        <result property="monitorWay"    column="monitor_way"    />
+        <result property="targetParam"    column="target_param"    />
+        <result property="expression"    column="expression"    />
+        <result property="interval"    column="interval"    />
+        <result property="operator"    column="operator"    />
+        <result property="seriousThreshold"    column="serious_threshold"    />
+        <result property="primaryThreshold"    column="primary_threshold"    />
+        <result property="secondaryThreshold"    column="secondary_threshold"    />
+        <result property="cause"    column="cause"    />
+        <result property="advice"    column="advice"    />
+        <result property="parser"    column="parser"    />
+        <result property="autoRun"    column="auto_run"    />
+        <result property="counter"    column="counter"    />
+        <result property="enabled"    column="enabled"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectIndexMonitorVo">
+        select monitor_id, name, desc, resource, index, monitor_way, target_param, expression, interval, operator, serious_threshold, primary_threshold, secondary_threshold, cause, advice, parser, auto_run, counter, enabled, create_time, create_by, update_time, update_by, remark from netm_index_monitor
+    </sql>
+
+    <select id="selectIndexMonitorList" parameterType="IndexMonitor" resultMap="IndexMonitorResult">
+        <include refid="selectIndexMonitorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
+            <if test="resource != null  and resource != ''"> and resource = #{resource}</if>
+            <if test="index != null  and index != ''"> and index = #{index}</if>
+            <if test="monitorWay != null  and monitorWay != ''"> and monitor_way = #{monitorWay}</if>
+            <if test="targetParam != null  and targetParam != ''"> and target_param = #{targetParam}</if>
+            <if test="expression != null  and expression != ''"> and expression = #{expression}</if>
+            <if test="interval != null "> and interval = #{interval}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="seriousThreshold != null "> and serious_threshold = #{seriousThreshold}</if>
+            <if test="primaryThreshold != null "> and primary_threshold = #{primaryThreshold}</if>
+            <if test="secondaryThreshold != null "> and secondary_threshold = #{secondaryThreshold}</if>
+            <if test="cause != null  and cause != ''"> and cause = #{cause}</if>
+            <if test="advice != null  and advice != ''"> and advice = #{advice}</if>
+            <if test="parser != null  and parser != ''"> and parser = #{parser}</if>
+            <if test="autoRun != null "> and auto_run = #{autoRun}</if>
+            <if test="counter != null "> and counter = #{counter}</if>
+            <if test="enabled != null "> and enabled = #{enabled}</if>
+        </where>
+    </select>
+    
+    <select id="selectIndexMonitorByMonitorId" parameterType="Long" resultMap="IndexMonitorResult">
+        <include refid="selectIndexMonitorVo"/>
+        where monitor_id = #{monitorId}
+    </select>
+        
+    <insert id="insertIndexMonitor" parameterType="IndexMonitor" useGeneratedKeys="true" keyProperty="monitorId">
+        insert into netm_index_monitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="desc != null">desc,</if>
+            <if test="resource != null and resource != ''">resource,</if>
+            <if test="index != null and index != ''">index,</if>
+            <if test="monitorWay != null and monitorWay != ''">monitor_way,</if>
+            <if test="targetParam != null">target_param,</if>
+            <if test="expression != null">expression,</if>
+            <if test="interval != null">interval,</if>
+            <if test="operator != null">operator,</if>
+            <if test="seriousThreshold != null">serious_threshold,</if>
+            <if test="primaryThreshold != null">primary_threshold,</if>
+            <if test="secondaryThreshold != null">secondary_threshold,</if>
+            <if test="cause != null">cause,</if>
+            <if test="advice != null">advice,</if>
+            <if test="parser != null">parser,</if>
+            <if test="autoRun != null">auto_run,</if>
+            <if test="counter != null">counter,</if>
+            <if test="enabled != null">enabled,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="resource != null and resource != ''">#{resource},</if>
+            <if test="index != null and index != ''">#{index},</if>
+            <if test="monitorWay != null and monitorWay != ''">#{monitorWay},</if>
+            <if test="targetParam != null">#{targetParam},</if>
+            <if test="expression != null">#{expression},</if>
+            <if test="interval != null">#{interval},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="seriousThreshold != null">#{seriousThreshold},</if>
+            <if test="primaryThreshold != null">#{primaryThreshold},</if>
+            <if test="secondaryThreshold != null">#{secondaryThreshold},</if>
+            <if test="cause != null">#{cause},</if>
+            <if test="advice != null">#{advice},</if>
+            <if test="parser != null">#{parser},</if>
+            <if test="autoRun != null">#{autoRun},</if>
+            <if test="counter != null">#{counter},</if>
+            <if test="enabled != null">#{enabled},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateIndexMonitor" parameterType="IndexMonitor">
+        update netm_index_monitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="desc != null">desc = #{desc},</if>
+            <if test="resource != null and resource != ''">resource = #{resource},</if>
+            <if test="index != null and index != ''">index = #{index},</if>
+            <if test="monitorWay != null and monitorWay != ''">monitor_way = #{monitorWay},</if>
+            <if test="targetParam != null">target_param = #{targetParam},</if>
+            <if test="expression != null">expression = #{expression},</if>
+            <if test="interval != null">interval = #{interval},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="seriousThreshold != null">serious_threshold = #{seriousThreshold},</if>
+            <if test="primaryThreshold != null">primary_threshold = #{primaryThreshold},</if>
+            <if test="secondaryThreshold != null">secondary_threshold = #{secondaryThreshold},</if>
+            <if test="cause != null">cause = #{cause},</if>
+            <if test="advice != null">advice = #{advice},</if>
+            <if test="parser != null">parser = #{parser},</if>
+            <if test="autoRun != null">auto_run = #{autoRun},</if>
+            <if test="counter != null">counter = #{counter},</if>
+            <if test="enabled != null">enabled = #{enabled},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where monitor_id = #{monitorId}
+    </update>
+
+    <delete id="deleteIndexMonitorByMonitorId" parameterType="Long">
+        delete from netm_index_monitor where monitor_id = #{monitorId}
+    </delete>
+
+    <delete id="deleteIndexMonitorByMonitorIds" parameterType="String">
+        delete from netm_index_monitor where monitor_id in 
+        <foreach item="monitorId" collection="array" open="(" separator="," close=")">
+            #{monitorId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.netmanager.domain.asset.mapper.DeviceMapper">
+    
+    <resultMap type="Device" id="DeviceResult">
+        <result property="deviceId"    column="device_id"    />
+        <result property="name"    column="name"    />
+        <result property="desc"    column="desc"    />
+        <result property="model"    column="model"    />
+        <result property="category"    column="category"    />
+        <result property="firmwareSuffix"    column="firmware_suffix"    />
+        <result property="icon"    column="icon"    />
+        <result property="discoveryWay"    column="discovery_way"    />
+        <result property="backgroundImage"    column="background_image"    />
+        <result property="protocol"    column="protocol"    />
+        <result property="webUrl"    column="web_url"    />
+        <result property="sysOid"    column="sys_oid"    />
+        <result property="enabled"    column="enabled"    />
+        <result property="topoLocked"    column="topo_locked"    />
+        <result property="topoShowName"    column="topo_show_name"    />
+        <result property="topoFullScreen"    column="topo_full_screen"    />
+        <result property="descContainMatcher"    column="desc_contain_matcher"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectDeviceVo">
+        select device_id, name, desc, model, category, firmware_suffix, icon, discovery_way, background_image, protocol, web_url, sys_oid, enabled, topo_locked, topo_show_name, topo_full_screen, desc_contain_matcher, create_time, create_by, update_by, update_time, remark from netm_device
+    </sql>
+
+    <select id="selectDeviceList" parameterType="Device" resultMap="DeviceResult">
+        <include refid="selectDeviceVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="firmwareSuffix != null  and firmwareSuffix != ''"> and firmware_suffix = #{firmwareSuffix}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="discoveryWay != null  and discoveryWay != ''"> and discovery_way = #{discoveryWay}</if>
+            <if test="backgroundImage != null  and backgroundImage != ''"> and background_image = #{backgroundImage}</if>
+            <if test="protocol != null  and protocol != ''"> and protocol = #{protocol}</if>
+            <if test="webUrl != null  and webUrl != ''"> and web_url = #{webUrl}</if>
+            <if test="sysOid != null  and sysOid != ''"> and sys_oid = #{sysOid}</if>
+            <if test="enabled != null "> and enabled = #{enabled}</if>
+            <if test="topoLocked != null "> and topo_locked = #{topoLocked}</if>
+            <if test="topoShowName != null "> and topo_show_name like concat('%', #{topoShowName}, '%')</if>
+            <if test="topoFullScreen != null "> and topo_full_screen = #{topoFullScreen}</if>
+            <if test="descContainMatcher != null  and descContainMatcher != ''"> and desc_contain_matcher = #{descContainMatcher}</if>
+        </where>
+    </select>
+    
+    <select id="selectDeviceByDeviceId" parameterType="Long" resultMap="DeviceResult">
+        <include refid="selectDeviceVo"/>
+        where device_id = #{deviceId}
+    </select>
+        
+    <insert id="insertDevice" parameterType="Device" useGeneratedKeys="true" keyProperty="deviceId">
+        insert into netm_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="desc != null">desc,</if>
+            <if test="model != null">model,</if>
+            <if test="category != null and category != ''">category,</if>
+            <if test="firmwareSuffix != null">firmware_suffix,</if>
+            <if test="icon != null">icon,</if>
+            <if test="discoveryWay != null">discovery_way,</if>
+            <if test="backgroundImage != null">background_image,</if>
+            <if test="protocol != null and protocol != ''">protocol,</if>
+            <if test="webUrl != null">web_url,</if>
+            <if test="sysOid != null">sys_oid,</if>
+            <if test="enabled != null">enabled,</if>
+            <if test="topoLocked != null">topo_locked,</if>
+            <if test="topoShowName != null">topo_show_name,</if>
+            <if test="topoFullScreen != null">topo_full_screen,</if>
+            <if test="descContainMatcher != null">desc_contain_matcher,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="model != null">#{model},</if>
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="firmwareSuffix != null">#{firmwareSuffix},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="discoveryWay != null">#{discoveryWay},</if>
+            <if test="backgroundImage != null">#{backgroundImage},</if>
+            <if test="protocol != null and protocol != ''">#{protocol},</if>
+            <if test="webUrl != null">#{webUrl},</if>
+            <if test="sysOid != null">#{sysOid},</if>
+            <if test="enabled != null">#{enabled},</if>
+            <if test="topoLocked != null">#{topoLocked},</if>
+            <if test="topoShowName != null">#{topoShowName},</if>
+            <if test="topoFullScreen != null">#{topoFullScreen},</if>
+            <if test="descContainMatcher != null">#{descContainMatcher},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDevice" parameterType="Device">
+        update netm_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="desc != null">desc = #{desc},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="firmwareSuffix != null">firmware_suffix = #{firmwareSuffix},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="discoveryWay != null">discovery_way = #{discoveryWay},</if>
+            <if test="backgroundImage != null">background_image = #{backgroundImage},</if>
+            <if test="protocol != null and protocol != ''">protocol = #{protocol},</if>
+            <if test="webUrl != null">web_url = #{webUrl},</if>
+            <if test="sysOid != null">sys_oid = #{sysOid},</if>
+            <if test="enabled != null">enabled = #{enabled},</if>
+            <if test="topoLocked != null">topo_locked = #{topoLocked},</if>
+            <if test="topoShowName != null">topo_show_name = #{topoShowName},</if>
+            <if test="topoFullScreen != null">topo_full_screen = #{topoFullScreen},</if>
+            <if test="descContainMatcher != null">desc_contain_matcher = #{descContainMatcher},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where device_id = #{deviceId}
+    </update>
+
+    <delete id="deleteDeviceByDeviceId" parameterType="Long">
+        delete from netm_device where device_id = #{deviceId}
+    </delete>
+
+    <delete id="deleteDeviceByDeviceIds" parameterType="String">
+        delete from netm_device where device_id in 
+        <foreach item="deviceId" collection="array" open="(" separator="," close=")">
+            #{deviceId}
+        </foreach>
+    </delete>
+</mapper>

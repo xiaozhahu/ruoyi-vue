@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.com.ruoyi.netmanager.domain.asset.mapper.IndexMapper">
+    
+    <resultMap type="Index" id="IndexResult">
+        <result property="indexId"    column="index_id"    />
+        <result property="category"    column="category"    />
+        <result property="unit"    column="unit"    />
+        <result property="alarmFilter"    column="alarm_filter"    />
+        <result property="param"    column="param"    />
+        <result property="name"    column="name"    />
+        <result property="priority"    column="priority"    />
+        <result property="valueType"    column="value_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="desc"    column="desc"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectIndexVo">
+        select index_id, category, unit, alarm_filter, param, name, priority, value_type, create_time, create_by, update_by, update_time, desc, remark from netm_index
+    </sql>
+
+    <select id="selectIndexList" parameterType="Index" resultMap="IndexResult">
+        <include refid="selectIndexVo"/>
+        <where>  
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="alarmFilter != null  and alarmFilter != ''"> and alarm_filter = #{alarmFilter}</if>
+            <if test="param != null  and param != ''"> and param = #{param}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="priority != null "> and priority = #{priority}</if>
+            <if test="valueType != null  and valueType != ''"> and value_type = #{valueType}</if>
+            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
+        </where>
+    </select>
+    
+    <select id="selectIndexByIndexId" parameterType="Long" resultMap="IndexResult">
+        <include refid="selectIndexVo"/>
+        where index_id = #{indexId}
+    </select>
+        
+    <insert id="insertIndex" parameterType="Index" useGeneratedKeys="true" keyProperty="indexId">
+        insert into netm_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">category,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="alarmFilter != null">alarm_filter,</if>
+            <if test="param != null">param,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="priority != null">priority,</if>
+            <if test="valueType != null">value_type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="desc != null">desc,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="alarmFilter != null">#{alarmFilter},</if>
+            <if test="param != null">#{param},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="priority != null">#{priority},</if>
+            <if test="valueType != null">#{valueType},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateIndex" parameterType="Index">
+        update netm_index
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="alarmFilter != null">alarm_filter = #{alarmFilter},</if>
+            <if test="param != null">param = #{param},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="priority != null">priority = #{priority},</if>
+            <if test="valueType != null">value_type = #{valueType},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="desc != null">desc = #{desc},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where index_id = #{indexId}
+    </update>
+
+    <delete id="deleteIndexByIndexId" parameterType="Long">
+        delete from netm_index where index_id = #{indexId}
+    </delete>
+
+    <delete id="deleteIndexByIndexIds" parameterType="String">
+        delete from netm_index where index_id in 
+        <foreach item="indexId" collection="array" open="(" separator="," close=")">
+            #{indexId}
+        </foreach>
+    </delete>
+</mapper>
