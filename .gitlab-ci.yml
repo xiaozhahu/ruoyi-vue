@@ -14,7 +14,7 @@ cache:
 build:
     stage: build jar
     tags:
-        - mscode
+        - ruoyi
     only:
         refs:
             - master
@@ -23,7 +23,7 @@ build:
 mscode docker:
     stage: build docker
     tags:
-        - mscode
+        - ruoyi
     only:
         refs:
             - master
@@ -36,7 +36,7 @@ mscode docker:
 push remote:
     stage: push
     tags:
-        - mscode
+        - ruoyi
     only:
         refs:
             - master
