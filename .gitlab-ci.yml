@@ -1,0 +1,47 @@
+image: maven:3.6.3
+stages:
+    - build jar
+    - build docker
+    - push
+variables:
+    MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+cache:
+    key: maven-cache
+    paths:
+        - .m2/
+        - ruoyi-*/target/
+build:
+    stage: build jar
+    tags:
+        - mscode
+    only:
+        refs:
+            - master
+    script:
+        - mvn $MAVEN_CLI_OPTS clean install -Dmaven.test.skip=true
+mscode docker:
+    stage: build docker
+    tags:
+        - mscode
+    only:
+        refs:
+            - master
+    before_script:
+        - docker info
+    script:
+        - docker build -f ./docker/ruoyi-dockerfile -t ruoyi:latest .
+    after_script:
+        - docker rmi $(docker images -f "dangling=true" -q)
+push remote:
+    stage: push
+    tags:
+        - mscode
+    only:
+        refs:
+            - master
+    script:
+        - docker login -u $ALIYUN_DOCKER_USER -p $ALIYUN_DOCKER_PASSWORD $ALIYUN_DOCKER_REGISTRY
+        - docker tag ruoyi:latest $ALIYUN_DOCKER_REGISTRY/$ALIYUN_DOCKER_NAMESPACE/ruoyi:latest
+        - docker push $ALIYUN_DOCKER_REGISTRY/$ALIYUN_DOCKER_NAMESPACE/ruoyi:latest
+
